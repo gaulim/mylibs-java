@@ -1,0 +1,31 @@
+<!--
+  Gradle Lastest Version Dependency
+-->
+
+<pre class="prettyprint">
+  // Lastest Version Gradle Dependency
+  <span id='gradle_dependency'>Loading...</span>
+</pre>
+
+<!-- Add this script to update "gradle_dependency" span to latest version -->
+<script type='text/javascript'>
+  const USER = 'gaulim';
+  const GROUP_ID = 'kr.gaulim'; // == 'com.github.' + USER;
+  const REPO = 'mylibs-java';
+  
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      let myArr = JSON.parse(xmlhttp.responseText);
+      populateRelease(myArr);
+    }
+  }
+  xmlhttp.open("GET", "https://api.github.com/repos/" + USER + "/" + REPO + "/releases", true);
+  xmlhttp.send();
+  
+  function populateRelease(arr) {
+    let release = arr[0].tag_name;
+    document.getElementById("gradle_dependency").innerHTML = "implementation '" + GROUP_ID + ":" + REPO + ":" + release + "'";
+  }
+</script>
+

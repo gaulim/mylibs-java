@@ -1,0 +1,38 @@
+<!--
+  Maven Lastest Version Dependency
+-->
+
+<pre class="prettyprint">
+  &lt;!-- Lastest Version Maven Dependency --&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;<span id='groupId'>Loading...</span>&lt;/groupId&gt;
+    &lt;artifactId&gt;<span id='artifactId'>Loading...</span>&lt;/artifactId&gt;
+    &lt;version&gt;<span id='latest_release'>Loading...</span>&lt;/version&gt;
+  &lt;/dependency&gt;
+</pre>
+
+<!-- Add this script to update "latest_release" span to latest version -->
+<script type='text/javascript'>
+  const USER = 'gaulim';
+  const GROUP_ID = 'kr.gaulim'; // == 'com.github.' + USER;
+  const REPO = 'mylibs-java';
+  
+  document.getElementById('groupId').innerHTML = GROUP_ID;
+  document.getElementById('artifactId').innerHTML = REPO;
+  
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      let myArr = JSON.parse(xmlhttp.responseText);
+      populateRelease(myArr);
+    }
+  }
+  xmlhttp.open("GET", "https://api.github.com/repos/" + USER + "/" + REPO + "/releases", true);
+  xmlhttp.send();
+  
+  function populateRelease(arr) {
+    let release = arr[0].tag_name;
+    document.getElementById('latest_release').innerHTML = release;
+  }
+</script>
+
