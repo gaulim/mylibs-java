@@ -15,7 +15,7 @@ plugins {
 }
 
 group = 'kr.gaulim'
-version = '0.0.0'
+version = '0.1.0'
 
 dependencies {
     // This dependency is exported to consumers, that is to say found on their compile classpath.
